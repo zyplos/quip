@@ -1,6 +1,10 @@
 import { cos_sim } from "@huggingface/transformers";
-import siglipTextEmbedder from "@/transformers/siglip-different-models/generateTextEmbedding";
-import siglipImageEmbedder from "@/transformers/siglip-different-models/generateImageEmbedding";
+//
+import siglipDifferentTextEmbedder from "@/transformers/siglip-different-models/generateTextEmbedding";
+import siglipDifferentImageEmbedder from "@/transformers/siglip-different-models/generateImageEmbedding";
+//
+import clipDifferentTextEmbedder from "@/transformers/clip-different-models/generateTextEmbedding";
+import clipDifferentImageEmbedder from "@/transformers/clip-different-models/generateImageEmbedding";
 
 type embeddingFunction = (arg: string) => Promise<number[]>;
 interface CompareData {
@@ -33,8 +37,13 @@ async function runCompare(
 await Promise.allSettled([
   runCompare(
     "siglip-different-models",
-    siglipTextEmbedder,
-    siglipImageEmbedder
+    siglipDifferentTextEmbedder,
+    siglipDifferentImageEmbedder
+  ),
+  runCompare(
+    "clip-different-models",
+    clipDifferentTextEmbedder,
+    clipDifferentImageEmbedder
   ),
 ]);
 
