@@ -1,6 +1,7 @@
 import type { PretrainedModelOptions } from "@huggingface/transformers";
 
 export const SIGLIP_MODEL_NAME = "Xenova/siglip-base-patch16-224";
+export const CLIP_MODEL_NAME = "Xenova/clip-vit-base-patch16";
 
 export const MODEL_CONFIG: PretrainedModelOptions = {
   dtype: "fp16",

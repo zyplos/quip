@@ -1,6 +1,6 @@
 import { cos_sim } from "@huggingface/transformers";
-import generateTextEmbedding from "@/transformers/siglip/generateTextEmbedding";
-import generateImageEmbedding from "@/transformers/siglip/generateImageEmbedding";
+import generateTextEmbedding from "@/transformers/siglip-different-models/generateTextEmbedding";
+import generateImageEmbedding from "@/transformers/siglip-different-models/generateImageEmbedding";
 
 const imageEmbedding = await generateImageEmbedding("./images/test.jpg");
 console.log(imageEmbedding.length);
