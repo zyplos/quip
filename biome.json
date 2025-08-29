@@ -26,6 +26,9 @@
       "correctness": {
         "noUnusedFunctionParameters": "off",
         "useUniqueElementIds": "off"
+      },
+      "suspicious": {
+        "noDebugger": "info"
       }
     }
   },

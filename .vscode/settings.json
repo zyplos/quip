@@ -1,3 +1,12 @@
 {
-	"cSpell.words": ["huggingface", "onnxruntime"]
+  "cSpell.words": [
+    "dtype",
+    "huggingface",
+    "onnxruntime",
+    "pooler",
+    "Pretrained",
+    "Siglip",
+    "tolist",
+    "Xenova"
+  ]
 }
