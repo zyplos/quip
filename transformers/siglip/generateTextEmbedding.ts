@@ -1,9 +1,9 @@
 import { AutoTokenizer, SiglipTextModel } from "@huggingface/transformers";
-import { MODEL_CONFIG, MODEL_NAME } from "./config";
+import { MODEL_CONFIG, SIGLIP_MODEL_NAME } from "@/transformers/config";
 
-const textProcessor = await AutoTokenizer.from_pretrained(MODEL_NAME);
+const textProcessor = await AutoTokenizer.from_pretrained(SIGLIP_MODEL_NAME);
 const textModel = await SiglipTextModel.from_pretrained(
-  MODEL_NAME,
+  SIGLIP_MODEL_NAME,
   MODEL_CONFIG
 );
 

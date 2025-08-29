@@ -4,11 +4,11 @@ import {
   SiglipVisionModel,
 } from "@huggingface/transformers";
 
-import { MODEL_CONFIG, MODEL_NAME } from "./config";
+import { MODEL_CONFIG, SIGLIP_MODEL_NAME } from "@/transformers/config";
 
-const imageProcessor = await AutoProcessor.from_pretrained(MODEL_NAME);
+const imageProcessor = await AutoProcessor.from_pretrained(SIGLIP_MODEL_NAME);
 const visionModel = await SiglipVisionModel.from_pretrained(
-  MODEL_NAME,
+  SIGLIP_MODEL_NAME,
   MODEL_CONFIG
 );
 
