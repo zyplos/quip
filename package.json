@@ -1,0 +1,25 @@
+{
+  "name": "quip",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "biome lint ./",
+    "format": "biome format --write ./",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.2",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.7.2"
+  },
+  "trustedDependencies": [
+    "onnxruntime-node",
+    "protobufjs"
+  ]
+}
