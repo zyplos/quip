@@ -1,16 +1,41 @@
 import { cos_sim } from "@huggingface/transformers";
-import generateTextEmbedding from "@/transformers/siglip-different-models/generateTextEmbedding";
-import generateImageEmbedding from "@/transformers/siglip-different-models/generateImageEmbedding";
+import siglipTextEmbedder from "@/transformers/siglip-different-models/generateTextEmbedding";
+import siglipImageEmbedder from "@/transformers/siglip-different-models/generateImageEmbedding";
 
-const imageEmbedding = await generateImageEmbedding("./images/test.jpg");
-console.log(imageEmbedding.length);
+type embeddingFunction = (arg: string) => Promise<number[]>;
+interface CompareData {
+  [model: string]: {
+    similarity: number;
+    dimension: number;
+  };
+}
 
-const textEmbedding = await generateTextEmbedding("a cat");
-console.log(textEmbedding.length);
+const COMPARE_DATA: CompareData = {};
 
-console.log(
-  "same embedding length",
-  imageEmbedding.length === textEmbedding.length
-);
+async function runCompare(
+  model: string,
+  generateTextEmbedding: embeddingFunction,
+  generateImageEmbedding: embeddingFunction
+) {
+  const imageEmbedding = await generateImageEmbedding("./images/test.jpg");
+  const textEmbedding = await generateTextEmbedding("a cat");
 
-console.log(cos_sim(textEmbedding, imageEmbedding));
+  if (imageEmbedding.length !== textEmbedding.length) {
+    console.log("!!! ", model, "HAS MISMATCHED EMBEDDINGS");
+  }
+
+  COMPARE_DATA[model] = {
+    similarity: cos_sim(textEmbedding, imageEmbedding),
+    dimension: imageEmbedding.length,
+  };
+}
+
+await Promise.allSettled([
+  runCompare(
+    "siglip-different-models",
+    siglipTextEmbedder,
+    siglipImageEmbedder
+  ),
+]);
+
+console.table(COMPARE_DATA);
