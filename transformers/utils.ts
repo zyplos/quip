@@ -1,5 +1,12 @@
 import { Tensor } from "@huggingface/transformers";
 
+export interface CompareData {
+  [model: string]: {
+    similarity: number;
+    dimension: number;
+  };
+}
+
 /*
 valid types
 from tensor.js in "@huggingface/transformers"
@@ -44,4 +51,32 @@ export function createEmptyTensor<T extends TensorTypes>(
   }
 
   return new Tensor(type, emptyData, dims);
+}
+
+// thanks gemini 2.5 flash
+export function markdownTable(data: CompareData): string {
+  // Check if the data is empty. If so, return an empty string.
+  if (Object.keys(data).length === 0) {
+    return "";
+  }
+
+  // Define the table headers.
+  const headers = ["Model", "Similarity", "Dimension"];
+
+  // Create the Markdown header row.
+  const headerRow = `| ${headers.join(" | ")} |`;
+
+  // Create the Markdown separator row for alignment.
+  const separatorRow = "|---|---|---|";
+
+  // Map over the keys of the data object to create each data row.
+  const dataRows = Object.keys(data).map((model) => {
+    // biome-ignore lint/style/noNonNullAssertion: shut up
+    const { similarity, dimension } = data[model]!;
+    // Format the row with the model name, similarity, and dimension.
+    return `| ${model} | ${similarity} | ${dimension} |`;
+  });
+
+  // Join all parts (header, separator, and data rows) with newlines.
+  return [headerRow, separatorRow, ...dataRows].join("\n");
 }

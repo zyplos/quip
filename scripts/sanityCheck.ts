@@ -17,19 +17,17 @@ import jinaV2AutoImageEmbedder from "@/transformers/jina-v2-auto/generateImageEm
 //
 import jinaV1CLIPTextEmbedder from "@/transformers/jina-v1-clip/generateTextEmbedding";
 import jinaV1CLIPImageEmbedder from "@/transformers/jina-v1-clip/generateImageEmbedding";
+import { MODEL_CONFIG } from "@/transformers/config";
+import { markdownTable, type CompareData } from "@/transformers/utils";
 
 type embeddingFunction = (arg: string) => Promise<number[]>;
-interface CompareData {
-  [model: string]: {
-    similarity: number;
-    dimension: number;
-  };
-}
 
 const QUERY = "a cat";
 // const QUERY =
-//   "Represent the query for retrieving evidence documents: an image of a cat";
-const IMAGE_PATH = "./images/test.jpg";
+// "Represent the query for retrieving evidence documents: an image of a cat";
+// const QUERY = "Represent the query for retrieving images: a cat";
+
+const IMAGE_PATH = "./images/other-test.jpg";
 const COMPARE_DATA: CompareData = {};
 
 async function runCompare(
@@ -71,5 +69,6 @@ await Promise.allSettled([
   runCompare("jina-v1-clip", jinaV1CLIPTextEmbedder, jinaV1CLIPImageEmbedder),
 ]);
 
-console.log(QUERY);
-console.table(COMPARE_DATA);
+console.log(`device ${MODEL_CONFIG.device}`);
+console.log(`"${QUERY}"`);
+console.log(markdownTable(COMPARE_DATA));
