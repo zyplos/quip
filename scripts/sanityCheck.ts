@@ -8,6 +8,9 @@ import clipDifferentImageEmbedder from "@/transformers/clip-different-models/gen
 //
 import clipProjectedTextEmbedder from "@/transformers/clip-models-with-projection/generateTextEmbedding";
 import clipProjectedImageEmbedder from "@/transformers/clip-models-with-projection/generateImageEmbedding";
+//
+import siglipModelTextEmbedder from "@/transformers/siglip-model/generateTextEmbedding";
+import siglipModelImageEmbedder from "@/transformers/siglip-model/generateImageEmbedding";
 
 type embeddingFunction = (arg: string) => Promise<number[]>;
 interface CompareData {
@@ -53,6 +56,7 @@ await Promise.allSettled([
     clipProjectedTextEmbedder,
     clipProjectedImageEmbedder
   ),
+  runCompare("siglip-model", siglipModelTextEmbedder, siglipModelImageEmbedder),
 ]);
 
 console.table(COMPARE_DATA);
