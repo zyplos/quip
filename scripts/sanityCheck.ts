@@ -11,6 +11,9 @@ import clipProjectedImageEmbedder from "@/transformers/clip-models-with-projecti
 //
 import siglipModelTextEmbedder from "@/transformers/siglip-model/generateTextEmbedding";
 import siglipModelImageEmbedder from "@/transformers/siglip-model/generateImageEmbedding";
+//
+import jinaV2AutoTextEmbedder from "@/transformers/jina-v2-auto/generateTextEmbedding";
+import jinaV2AutoImageEmbedder from "@/transformers/jina-v2-auto/generateImageEmbedding";
 
 type embeddingFunction = (arg: string) => Promise<number[]>;
 interface CompareData {
@@ -20,6 +23,9 @@ interface CompareData {
   };
 }
 
+const QUERY =
+  "Represent the query for retrieving evidence documents: an image of a cat";
+const IMAGE_PATH = "./images/test.jpg";
 const COMPARE_DATA: CompareData = {};
 
 async function runCompare(
@@ -27,10 +33,10 @@ async function runCompare(
   generateTextEmbedding: embeddingFunction,
   generateImageEmbedding: embeddingFunction
 ) {
-  const imageEmbedding = await generateImageEmbedding("./images/test.jpg");
-  const textEmbedding = await generateTextEmbedding("a cat");
+  const textEmbedding = await generateTextEmbedding(QUERY);
+  const imageEmbedding = await generateImageEmbedding(IMAGE_PATH);
 
-  if (imageEmbedding.length !== textEmbedding.length) {
+  if (textEmbedding.length !== imageEmbedding.length) {
     console.log("!!! ", model, "HAS MISMATCHED EMBEDDINGS");
   }
 
@@ -57,6 +63,8 @@ await Promise.allSettled([
     clipProjectedImageEmbedder
   ),
   runCompare("siglip-model", siglipModelTextEmbedder, siglipModelImageEmbedder),
+  runCompare("jina-v2-auto", jinaV2AutoTextEmbedder, jinaV2AutoImageEmbedder),
 ]);
 
+console.log(QUERY);
 console.table(COMPARE_DATA);
