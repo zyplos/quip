@@ -14,6 +14,9 @@ import siglipModelImageEmbedder from "@/transformers/siglip-model/generateImageE
 //
 import jinaV2AutoTextEmbedder from "@/transformers/jina-v2-auto/generateTextEmbedding";
 import jinaV2AutoImageEmbedder from "@/transformers/jina-v2-auto/generateImageEmbedding";
+//
+import jinaV1CLIPTextEmbedder from "@/transformers/jina-v1-clip/generateTextEmbedding";
+import jinaV1CLIPImageEmbedder from "@/transformers/jina-v1-clip/generateImageEmbedding";
 
 type embeddingFunction = (arg: string) => Promise<number[]>;
 interface CompareData {
@@ -23,8 +26,9 @@ interface CompareData {
   };
 }
 
-const QUERY =
-  "Represent the query for retrieving evidence documents: an image of a cat";
+const QUERY = "a cat";
+// const QUERY =
+//   "Represent the query for retrieving evidence documents: an image of a cat";
 const IMAGE_PATH = "./images/test.jpg";
 const COMPARE_DATA: CompareData = {};
 
@@ -64,6 +68,7 @@ await Promise.allSettled([
   ),
   runCompare("siglip-model", siglipModelTextEmbedder, siglipModelImageEmbedder),
   runCompare("jina-v2-auto", jinaV2AutoTextEmbedder, jinaV2AutoImageEmbedder),
+  runCompare("jina-v1-clip", jinaV1CLIPTextEmbedder, jinaV1CLIPImageEmbedder),
 ]);
 
 console.log(QUERY);
