@@ -11,7 +11,7 @@ export const MODEL_CONFIG: PretrainedModelOptions = {
   device: "cpu",
 };
 
-export const IMAGES_DIR = "./images";
+export const IMAGES_DIR = "./imagesSubset";
 // export const IMAGES_DIR = "./testImages";
 
 export const EMBEDDING_LENGTH = 768;

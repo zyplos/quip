@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "biome lint ./",
     "format": "biome format --write ./",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "embeddings": "bun embeddingManager/createEmbeddingDirectory.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",

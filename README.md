@@ -40,7 +40,7 @@ device cpu
 ---
 
 
-<!-- device dml
+device dml
 "a cat"
 | Model | Similarity | Dimension |
 |---|---|---|
@@ -73,7 +73,7 @@ device dml
 | clip-models-with-projection | 0.2721036938576663 | 512 |
 | clip-different-models | 0.2721036938576663 | 512 |
 | jina-v1-clip | 0.19523586004954271 | 768 |
-| jina-v2-auto | 0.025877562103739496 | 1024 | -->
+| jina-v2-auto | 0.025877562103739496 | 1024 |
 
 
 ---
