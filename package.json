@@ -16,7 +16,8 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@huggingface/transformers": "^3.7.2"
+    "@huggingface/transformers": "^3.7.2",
+    "sqlite-vec": "^0.1.7-alpha.2"
   },
   "trustedDependencies": [
     "onnxruntime-node",
