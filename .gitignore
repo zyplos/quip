@@ -1,7 +1,6 @@
 images
 imagesSubset
 testImages
-scratchpad
 embeddingManager/embeddings.*
 
 # dependencies (bun install)
